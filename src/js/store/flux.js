@@ -52,11 +52,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			createContact: async (newContact) => {
 				const store = getStore();
-				console.log('newContact',newContact)
+				console.log('newContact', newContact.name)
 
 				await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().diary}/contacts`, {
 					method: 'POST',
-					body: JSON.stringify(newContact)
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						name: newContact.name,
+						phone: newContact.phone,
+						email: newContact.email,
+						address: newContact.address
+					})
 				}).then(resp => {
 					if (resp.ok) {
 						const updatedContacts = [...store.contacts, newContact];
