@@ -5,22 +5,37 @@ import { Context } from "../store/appContext";
 
 const ContactItem = ({ contact, onDelete, onEdit }) => {
     return (
-        <li className="list-group-item">
-            <div className="row">
-                <div className="col-md-4 d-flex justify-content-center align-items-center">
-                    <h1>{contact.name}</h1>
+        <div className="col-md-4 col-sm-3 mb-4">
+            <div className="card">
+                <div className="card-header">
+                    <h5 className="card-title text-center mt-2">{contact.name}</h5>
                 </div>
-                <div className="col-md-4 d-flex flex-column">
-                    <p><ImLocation /> {contact.address}</p>
-                    <p><ImPhone /> {contact.phone}</p>
-                    <p><ImMail /> {contact.email}</p>
+                <div className="card-body">
+                    <p className="card-text"><ImLocation /> {contact.address}</p>
+                    <p className="card-text"><ImPhone /> {contact.phone}</p>
+                    <p className="card-text"><ImMail /> {contact.email}</p>
                 </div>
-                <div className="col-md-4 d-flex justify-content-end align-items-start">
+                <div className="card-footer d-flex justify-content-end">
                     <button className="btn btn-light" onClick={onDelete}><MdEdit /></button>
                     <button className="btn btn-light ms-2" onClick={onDelete}><MdDelete /></button>
                 </div>
             </div>
-        </li>
+        </div>
+        // <li className="list-group-item">
+        //     <div className="row">
+        //         <div className="col-md-4 d-flex justify-content-center align-items-center">
+        //             <h1></h1>
+        //         </div>
+        //         <div className="col-md-4 d-flex flex-column">
+        //             <p></p>
+        //             <p></p>
+        //             <p></p>
+        //         </div>
+        //         <div className="col-md-4 d-flex justify-content-end align-items-start">
+
+        //         </div>
+        //     </div>
+        // </li>
     );
 };
 

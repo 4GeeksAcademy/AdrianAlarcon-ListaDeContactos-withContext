@@ -13,7 +13,7 @@ export const ContactList = () => {
 
 	return (
 		<div className="container">
-			<ul>
+			<div className="row">
 				{store.contacts.map((contact, index) => (
 					<ContactItem
 						key={index}
@@ -21,7 +21,7 @@ export const ContactList = () => {
 						onDelete={() => actions.deleteContact(contact.id)}
 					/>
 				))}
-			</ul>
+			</div>
 		</div>
 	);
 }
