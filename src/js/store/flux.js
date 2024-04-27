@@ -1,32 +1,21 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contacts: [
-				{
-					name: "pedro",
-					phone: "3428934",
-					email: "pedro@gmail.com",
-					address: "asjkdhasjdkh"
-				},
-				{
-					name: "juan",
-					phone: "989889",
-					email: "juan@gmail.com",
-					address: "yutyutytyu"
-				}
-			],
+			contacts: [],
 			diary: 'adrian'
 		},
 		actions: {
+
 			getDiary: async () => {
 				console.log("Ejecutando getDiary");
 
 				await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().diary}`).then(async resp => {
 					if (resp.ok) {
 						console.log("Agenda encontrada");
+						getActions().getContacts();
 					} else {
 						console.log("Agenda no encontrada");
-						getActions().createDiary()
+						getActions().createDiary();
 					}
 				}).catch(err => {
 					console.error("Error fetching:", err);
@@ -47,6 +36,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}).catch(err => {
 					console.error("Error creando agenda:", err);
 				});
+			},
+
+			getContacts: async () => {
+				await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().diary}/contacts`, {
+				})
+					.then(resp => {
+						if (resp.ok) {
+							return resp.json();
+						} else {
+							throw new Error('Error al obtener contactos');
+						}
+					})
+					.then(contacts => {
+						setStore({ contacts: contacts.contacts });
+						console.log('Contacts cargados:', contacts);
+					})
+					.catch(err => {
+						console.error('Error en getContacts:', err);
+					});
 			},
 
 
