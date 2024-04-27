@@ -14,13 +14,13 @@ const Layout = () => {
 	return (
 		<div>
 			<BrowserRouter basename={basename}>
-					<Navbar />
-					<Routes>
-						<Route path="/" element={<ContactList />} />
-						<Route path="/form" element={<Form />} />
-						<Route path="*" element={<h1>Not found!</h1>} />
-					</Routes>
-					<Footer />
+				<Navbar />
+				<Routes>
+					<Route path="/" element={<ContactList />} />
+					<Route path="/form" element={<Form />} />
+					<Route path="*" element={<h1>Not found!</h1>} />
+				</Routes>
+				<Footer />
 			</BrowserRouter>
 		</div>
 	);

@@ -16,7 +16,7 @@ const ContactItem = ({ contact, onDelete, onEdit }) => {
                     <p><ImMail /> {contact.email}</p>
                 </div>
                 <div className="col-md-4 d-flex justify-content-end align-items-start">
-                    <button className="btn btn-light" onClick={""}><MdEdit /></button>
+                    <button className="btn btn-light" onClick={onDelete}><MdEdit /></button>
                     <button className="btn btn-light ms-2" onClick={onDelete}><MdDelete /></button>
                 </div>
             </div>
