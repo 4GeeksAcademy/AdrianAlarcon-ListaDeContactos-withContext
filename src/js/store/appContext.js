@@ -24,10 +24,7 @@ const injectContext = PassedComponent => {
 		if (!state) return null;
 
 		useEffect(() => {
-			alert("ejecutando useeffect");
-			if (state.actions && state.actions.getDiary) {
-				state.actions.getDiary();
-			}
+			state.actions.getDiary();
 		}, []);
 
 		return (

@@ -4,14 +4,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			contacts: [
 				{
 					name: "pedro",
-					email: "pedro@gmail.com",
 					phone: "3428934",
+					email: "pedro@gmail.com",
 					address: "asjkdhasjdkh"
 				},
 				{
 					name: "juan",
-					email: "juan@gmail.com",
 					phone: "989889",
+					email: "juan@gmail.com",
 					address: "yutyutytyu"
 				}
 			],
@@ -50,10 +50,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			createContact: async (diary, body) => {
+			createContact: async (newContact) => {
+				const store = getStore();
+				console.log('newContact',newContact)
+
 				await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().diary}/contacts`, {
 					method: 'POST',
-					body: JSON.stringify(body)
+					body: JSON.stringify(newContact)
+				}).then(resp => {
+					if (resp.ok) {
+						const updatedContacts = [...store.contacts, newContact];
+
+						setStore({
+							...store,
+							contacts: updatedContacts,
+						});
+					} else {
+						alert("no se pudo crear el usuario")
+					}
 				})
 			},
 
