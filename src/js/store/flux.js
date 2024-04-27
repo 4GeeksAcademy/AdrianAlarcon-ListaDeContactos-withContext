@@ -98,10 +98,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			editContact: async (contact) => {
-				if (!contact.id || typeof contact.id !== "number") {
-					console.error("ID del contacto es inválido o no se encontró");
-					return; // Salir de la función si el ID es inválido
-				}
+
 				try {
 					const response = await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().diary}/contacts/${contact.id}`, {
 						method: 'PUT',
@@ -144,13 +141,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 					method: 'DELETE',
 				}).then(resp => {
 					if (resp.ok) {
-						const updatedContacts = store.contacts.filter((_, index) => index !== contactIndex);
+						const updatedContacts = store.contacts.filter((_, index) => index !== contact_id);
 
 						setStore({
 							...store,
 							contacts: updatedContacts
 						});
-						getActions().getContacts()
+						getActions().getContacts();
 					} else {
 						alert('No se pudo eliminar el contacto');
 					}
