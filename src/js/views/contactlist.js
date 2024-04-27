@@ -13,6 +13,11 @@ export const ContactList = () => {
 
 	return (
 		<div className="container">
+			<div className="row mb-2 ">
+				<div className="col d-flex justify-content-end">
+					<Link to={"/form"}><button className="btn btn-success">Add new contact</button></Link>
+				</div>
+			</div>
 			<div className="row">
 				{store.contacts.map((contact, index) => (
 					<ContactItem
