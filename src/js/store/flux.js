@@ -2,9 +2,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
 			contacts: [],
+			editContactInfo: null,
 			diary: 'adrian'
 		},
 		actions: {
+
+			editInfoContact: (contact) => {
+				const store = getStore();
+				setStore({
+					...store,
+					editContactInfo: contact,
+				});
+			},
+
 
 			getDiary: async () => {
 				console.log("Ejecutando getDiary");
@@ -85,6 +95,46 @@ const getState = ({ getStore, getActions, setStore }) => {
 						alert("no se pudo crear el usuario")
 					}
 				})
+			},
+
+			editContact: async (contact) => {
+				if (!contact.id || typeof contact.id !== "number") {
+					console.error("ID del contacto es inválido o no se encontró");
+					return; // Salir de la función si el ID es inválido
+				}
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().diary}/contacts/${contact.id}`, {
+						method: 'PUT',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify({
+							name: contact.name,
+							phone: contact.phone,
+							email: contact.email,
+							address: contact.address,
+						}),
+					});
+
+					if (response.ok) {
+						const updatedContact = await response.json();
+						const store = getStore();
+
+						const updatedContacts = store.contacts.map((contact) =>
+							contact.id === updatedContact.id ? updatedContact : contact
+						);
+
+						setStore({
+							...store,
+							contacts: updatedContacts,
+						});
+						getActions().getContacts()
+					} else {
+						console.error("Error al editar el contacto", await response.text());
+					}
+				} catch (error) {
+					console.error("Ocurrió un error al editar el contacto:", error);
+				}
 			},
 
 			deleteContact: async (contact_id) => {

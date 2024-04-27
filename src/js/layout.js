@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { ContactList } from "./views/contactlist";
 import { Form } from "./views/form";
+import { Formedit } from "./views/formedit";
 import injectContext from "./store/appContext";
 
 import { Navbar } from "./component/navbar";
@@ -18,6 +19,7 @@ const Layout = () => {
 				<Routes>
 					<Route path="/" element={<ContactList />} />
 					<Route path="/form" element={<Form />} />
+					<Route path="/formedit" element={<Formedit />} />
 					<Route path="*" element={<h1>Not found!</h1>} />
 				</Routes>
 				<Footer />

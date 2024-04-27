@@ -1,15 +1,22 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import ContactItem from "../component/contactitem";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 
 export const ContactList = () => {
 	const { store, actions } = useContext(Context);
+	const navigate = useNavigate();
+
+	const handleEdit = (contact) => {
+		actions.editInfoContact(contact);
+		navigate("/formedit");
+	};
 
 	useEffect(() => {
 		actions.getContacts();
-	})
+	}, [])
 
 	return (
 		<div className="container">
@@ -24,6 +31,7 @@ export const ContactList = () => {
 						key={index}
 						contact={contact}
 						onDelete={() => actions.deleteContact(contact.id)}
+						onEdit={() => handleEdit(contact)}
 					/>
 				))}
 			</div>
