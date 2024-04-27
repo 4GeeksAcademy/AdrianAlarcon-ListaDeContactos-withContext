@@ -7,6 +7,10 @@ import "../../styles/home.css";
 export const ContactList = () => {
 	const { store, actions } = useContext(Context);
 
+	useEffect(() => {
+		actions.getContacts();
+	})
+
 	return (
 		<div className="container">
 			<ul>
@@ -14,7 +18,7 @@ export const ContactList = () => {
 					<ContactItem
 						key={index}
 						contact={contact}
-						onDelete={() => actions.deleteContact(index)}
+						onDelete={() => actions.deleteContact(contact.id)}
 					/>
 				))}
 			</ul>

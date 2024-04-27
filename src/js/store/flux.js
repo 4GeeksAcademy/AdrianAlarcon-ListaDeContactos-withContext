@@ -87,16 +87,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 			},
 
-			deleteContact: () => {
+			deleteContact: async (contact_id) => {
 				const store = getStore();
 
-				// El _ significa que no utilizamos el valor actual
-				const updatedContacts = store.contacts.filter((_, index) => index !== contactIndex);
+				await fetch(`https://playground.4geeks.com/contact/agendas/${getStore().diary}/contacts/${contact_id}`, {
+					method: 'DELETE',
+				}).then(resp => {
+					if (resp.ok) {
+						const updatedContacts = store.contacts.filter((_, index) => index !== contactIndex);
 
-				setStore({
-					...store,
-					contacts: updatedContacts
-				});
+						setStore({
+							...store,
+							contacts: updatedContacts
+						});
+						getActions().getContacts()
+					} else {
+						alert('No se pudo eliminar el contacto');
+					}
+				})
 			}
 		}
 	};
