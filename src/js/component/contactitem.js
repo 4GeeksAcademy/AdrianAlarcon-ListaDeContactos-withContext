@@ -21,21 +21,6 @@ const ContactItem = ({ contact, onDelete, onEdit }) => {
                 </div>
             </div>
         </div>
-        // <li className="list-group-item">
-        //     <div className="row">
-        //         <div className="col-md-4 d-flex justify-content-center align-items-center">
-        //             <h1></h1>
-        //         </div>
-        //         <div className="col-md-4 d-flex flex-column">
-        //             <p></p>
-        //             <p></p>
-        //             <p></p>
-        //         </div>
-        //         <div className="col-md-4 d-flex justify-content-end align-items-start">
-
-        //         </div>
-        //     </div>
-        // </li>
     );
 };
 
